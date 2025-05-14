@@ -112,6 +112,7 @@ const setupWebSocket = () => {
     return;
   }
 
+<<<<<<< HEAD
   const wsProtocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
   const wsHost = import.meta.env.VITE_API_URL // contoh: http://127.0.0.1:3000
 
@@ -121,6 +122,18 @@ const setupWebSocket = () => {
   // // Gabungkan
   // const wsUrl = `ws://127.0.0.1:3000`;
   const wsUrl = `${wsProtocol}${fixWsHost}`;
+=======
+  // Kode di bawah ini dimatikan karena hanya menggunakan satu server yang sama.
+  // const wsProtocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+  // const wsHost = import.meta.env.VITE_API_URL // contoh: http://127.0.0.1:3000
+
+  // const fixWsHost = wsHost.replace(/^https?:\/\//, '');
+
+  // const wsUrl = `${wsProtocol}${fixWsHost}`;
+
+  const wsUrl = `ws://127.0.0.1:3000`;
+
+>>>>>>> 138c4ae (sss)
 
   ws = new WebSocket(wsUrl);
 

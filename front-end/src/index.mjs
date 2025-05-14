@@ -112,16 +112,15 @@ const setupWebSocket = () => {
     return;
   }
 
+  // Kode di bawah ini dimatikan karena hanya menggunakan satu server yang sama.
+  // const wsProtocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+  // const wsHost = import.meta.env.VITE_API_URL // contoh: http://127.0.0.1:3000
 
-  const wsProtocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
-  const wsHost = import.meta.env.VITE_API_URL // contoh: http://127.0.0.1:3000
+  // const fixWsHost = wsHost.replace(/^https?:\/\//, '');
 
-  // Ambil host dan port tanpa protokol
-  const fixWsHost = wsHost.replace(/^https?:\/\//, '');
+  // const wsUrl = `${wsProtocol}${fixWsHost}`;
 
-  // // Gabungkan
-  // const wsUrl = `ws://127.0.0.1:3000`;
-  const wsUrl = `${wsProtocol}${fixWsHost}`;
+  const wsUrl = `ws://127.0.0.1:3000`;
 
   ws = new WebSocket(wsUrl);
 

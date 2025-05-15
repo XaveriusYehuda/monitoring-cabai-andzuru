@@ -64,10 +64,10 @@ wsExternal.on('open', () => {
 
 wsExternal.on('message', (message) => {
   try {
-    console.log('Pesan diterima dari server:', message.toString());
+    // console.log('Pesan diterima dari server:', message.toString());
     const parsed = JSON.parse(message);
     if (parsed.action === 'initialData') {
-      console.log('Received initial data:', parsed.data);
+      // console.log('Received initial data:', parsed.data);
 
       Object.entries(parsed.data).forEach(([sensorType, dataArray]) => {
         dataArray.forEach(item => {
@@ -94,16 +94,16 @@ wsExternal.on('message', (message) => {
       });
 
       // Tampilkan isi cache
-      console.log('Isi sensorDataCache:');
+      // console.log('Isi sensorDataCache:');
       sensorDataCache.forEach((value, key) => {
-        console.log(`Sensor: ${key}`);
-        console.log(value);
-        console.table(value);
+        // console.log(`Sensor: ${key}`);
+        // console.log(value);
+        // console.table(value);
       });
     }
 
     if (parsed.action === 'dataUpdate') {
-      console.log('Accepted Data: ', parsed.data);
+      // console.log('Accepted Data: ', parsed.data);
 
       const sensorPayload = parsed.data;
       // Jika `parsed.data` adalah array → forEach
@@ -131,11 +131,11 @@ wsExternal.on('message', (message) => {
       };
 
       // Tampilkan isi cache
-      console.log('Isi sensorDataCache:');
+      // console.log('Isi sensorDataCache:');
       sensorDataCache.forEach((value, key) => {
-        console.log(`Sensor: ${key}`);
-        console.log(value);
-        console.table(value);
+        // console.log(`Sensor: ${key}`);
+        // console.log(value);
+        // console.table(value);
       });
     }
   } catch (error) {
@@ -180,7 +180,7 @@ mqttService.setMessageHandler((topic, payload) => {
     }
 
     const normalizedData = normalizePayload(rawPayload);
-    console.log('Data diterma dari MQTT: ', normalizedData);
+    // console.log('Data diterma dari MQTT: ', normalizedData);
 
     const message = {
       topic,
@@ -197,13 +197,13 @@ mqttService.setMessageHandler((topic, payload) => {
 
 
 
-    console.log('👋 Ini adalah pesan yang siap dikirim :', message);
+    // console.log('👋 Ini adalah pesan yang siap dikirim :', message);
 
     const messageString = JSON.stringify(message);
     clients.forEach(client => {
       if (client.readyState === WebSocket.OPEN) {
         client.send(messageString);
-        console.log('🚀 OTW KIRIM :', messageString);
+        // console.log('🚀 OTW KIRIM :', messageString);
       }
     });
   } catch (error) {
@@ -213,7 +213,7 @@ mqttService.setMessageHandler((topic, payload) => {
 
 // WebSocket lokal untuk client UI
 wss.on('connection', (ws) => {
-  console.log('New WebSocket client connected');
+  // console.log('New WebSocket client connected');
   clients.add(ws);
 
   ws.isAlive = true;
@@ -243,7 +243,7 @@ wss.on('connection', (ws) => {
     const messageString = JSON.stringify(message);
     if (ws.readyState === WebSocket.OPEN) {
       ws.send(messageString);
-      console.log('🚀 Kirim data cache awal ke client:', messageString);
+      // console.log('🚀 Kirim data cache awal ke client:', messageString);
     }
   } catch (error) {
     console.error('Error sending initial cache to client:', error);
